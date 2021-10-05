@@ -1,12 +1,13 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const express = require("express");
+const db = require("./mongo");
 
 const app = express();
 
-let data1 = [];
-let data2 = [];
-let data3 = [];
+let flipcartData = [];
+let snapdealData = [];
+let amazonData = [];
 
 const getData = async () => {
   try {
@@ -25,17 +26,14 @@ const getData = async () => {
           .children("span.a-offscreen")
           .text();
         let offerprice = $(ele).find("span.a-price-whole").text();
-        data1[index] = { image, title, rating, price, offerprice };
+        amazonData[index] = { image, title, rating, price, offerprice };
       }
     });
-    console.log(data1);
+    console.log(amazonData);
+    db.products.insertMany(amazonData);
   } catch (err) {
     console.log(err);
   }
-};
-getData();
-
-const getData2 = async () => {
   try {
     const response = await axios.get(
       `https://www.flipkart.com/search?q=mobiles&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off`
@@ -50,17 +48,15 @@ const getData2 = async () => {
         let price = $(ele).find("._3I9_wc").text();
         let offerprice = $(ele).find("._30jeq3").text();
         if (image) {
-          data2[index] = { image, title, rating, price, offerprice };
+          flipcartData[index] = { image, title, rating, price, offerprice };
         }
       }
     });
-    console.log(data2);
+    console.log(flipcartData);
+    db.products.insertMany(flipcartData);
   } catch (err) {
     console.log(err);
   }
-};
-getData2();
-const getData3 = async () => {
   try {
     const response = await axios.get(
       `https://www.snapdeal.com/search?keyword=mobiles&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy`
@@ -78,27 +74,14 @@ const getData3 = async () => {
         let price = $(ele).find("span.product-desc-price").text();
         let offerprice = $(ele).find("span.product-price").text();
         if (image) {
-          data3[index] = { image, title, price, offerprice };
+          snapdealData[index] = { image, title, price, offerprice };
         }
       }
     });
-    console.log(data3);
+    console.log(snapdealData);
+    db.products.insertMany(snapdealData);
   } catch (err) {
     console.log(err);
   }
 };
-
-app.use(express.json());
-
-
-app.get(`/:data2`, (req, res) => {
-  res.send(data2);
-});
-
-app.listen(3001);
-// const server = http.createServer((req, res) => {
-//   res.write(JSON.stringify(output));
-//   res.end();
-// });
-
-// server.listen(3001);
+module.exports = getData;
