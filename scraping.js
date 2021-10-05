@@ -32,6 +32,10 @@ const getData = async () => {
   } catch (err) {
     console.log(err);
   }
+};
+getData();
+
+const getData2 = async () => {
   try {
     const response = await axios.get(
       `https://www.flipkart.com/search?q=mobiles&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off`
@@ -54,6 +58,9 @@ const getData = async () => {
   } catch (err) {
     console.log(err);
   }
+};
+getData2();
+const getData3 = async () => {
   try {
     const response = await axios.get(
       `https://www.snapdeal.com/search?keyword=mobiles&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy`
@@ -80,12 +87,10 @@ const getData = async () => {
     console.log(err);
   }
 };
-getData();
+
 app.use(express.json());
 
-app.get(`/:data`, (req, res) => {
-  res.send(data1, data2, data3);
-});
+
 app.get(`/:data2`, (req, res) => {
   res.send(data2);
 });
