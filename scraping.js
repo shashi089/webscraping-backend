@@ -39,7 +39,7 @@ const getData = async () => {
     let count = 0;
     $("._1AtVbE").each((index, ele) => {
       if (count < 10) {
-        let image = $(ele).find("._2kHMtA").children().attr("href");
+        let image = $(ele).find("._396cs4").children().attr("src");
         let title = $(ele).find("._4rR01T").text();
         let rating = $(ele).find("span._1lRcqv").children().text();
         let price = $(ele).find("._3I9_wc").text();
