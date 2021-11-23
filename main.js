@@ -4,7 +4,7 @@ const getdata = require("./scraping");
 const productRut = require("./Routes/products");
 const cors = require("cors");
 require("dotenv").config();
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 const app = express();
 
@@ -30,8 +30,8 @@ server = async () => {
     });
 
     app.use("/products", productRut);
-    app.listen(PORT, () => {
-      console.log(`server is running at ${PORT}`);
+    app.listen(port, () => {
+      console.log(`server is running at ${port}`);
     });
   } catch (err) {
     console.log(err);
