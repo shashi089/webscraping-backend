@@ -39,7 +39,7 @@ const getData = async () => {
     let count = 0;
     $("._1AtVbE").each((index, ele) => {
       if (count < 10) {
-        let image = $(ele).find("._396cs4").children().attr("src");
+        let image = $(ele).find("._396cs4").attr("src");
         let title = $(ele).find("._4rR01T").text();
         let rating = $(ele).find("span._1lRcqv").children().text();
         let price = $(ele).find("._3I9_wc").text();
@@ -65,10 +65,7 @@ const getData = async () => {
     let count = 0;
     $(".favDp").each((index, ele) => {
       if (count < 10) {
-        let image = $(ele)
-          .find(".product-tuple-image")
-          .children("a")
-          .attr("href");
+        let image = $(ele).find(".picture-elem source").attr("srcset");
         let title = $(ele).find(".product-title").text();
         let rating = "";
         let price = $(ele).find("span.product-desc-price").text();
