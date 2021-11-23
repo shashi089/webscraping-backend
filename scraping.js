@@ -67,7 +67,7 @@ const getData = async () => {
       if (count < 10) {
         let image = $(ele).find(".picture-elem source").attr("srcset");
         let title = $(ele).find(".product-title").text();
-        let rating = "";
+        let rating = "NA";
         let price = $(ele).find("span.product-desc-price").text();
         let offerprice = $(ele).find("span.product-price").text();
         if (price !== "" || title !== "") {
