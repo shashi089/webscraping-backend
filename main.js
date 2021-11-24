@@ -1,6 +1,6 @@
 const express = require("express");
 const mongo = require("./mongo");
-const getdata = require("./scraping");
+const getData = require("./scraping");
 const productRut = require("./Routes/products");
 const cors = require("cors");
 require("dotenv").config();
@@ -12,12 +12,12 @@ server = async () => {
   try {
     await mongo.connect();
     await mongo.products.deleteMany({});
-    await getdata();
+    await getData();
     console.log("data inserted");
     //reset data base for every 12 hrs
     setInterval(async () => {
       await mongo.products.deleteMany({});
-      await getdata();
+      await getData();
       console.log("data reseted sucessfully");
     }, 43200 * 1000);
 
