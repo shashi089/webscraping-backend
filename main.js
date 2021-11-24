@@ -17,7 +17,7 @@ server = async () => {
     //reset data base for every 12 hrs
     setInterval(async () => {
       await mongo.products.deleteMany({});
-      await scrapdata();
+      await getdata();
       console.log("data reseted sucessfully");
     }, 43200 * 1000);
 
